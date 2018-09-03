@@ -11,6 +11,26 @@
 <body>
  <img src="${images}pro.png"> 
 <h1>Welcome to ur Profile</h1>
-<a href="update">Update</a>
+<form>
+<table>
+<tr>
+<td>UserName:</td>
+<td>${vendor.name}</td>
+</tr>
+<tr>
+<td>Email:</td>
+<td>${vendor.email}</td>
+</tr>
+<tr>
+<td>Mobile Number:</td>
+<td>${vendor.mobile}</td>
+</tr>
+<tr>
+<td>Company Name:</td>
+<td>${vendor.companyName}</td>
+</tr>
+</table>
+</form>
+<button><a href="edit">Edit</a></button>
 </body>
 </html>

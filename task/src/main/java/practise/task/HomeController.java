@@ -73,12 +73,13 @@ public class HomeController
 		return "login";
 	}
 
-	@PostMapping
-	public String getVendor(@ModelAttribute("login") Login login,Vendor vendor)
+	@PostMapping("/login")
+	public String getVendor(@ModelAttribute("login") Login login,Vendor vendor,HttpSession httpSession)
 		{
 		if((vendorService.login(login.getEmail(),login.getPassword())!=null))
 		{
 			vendor=vendorService.login(login.getEmail(),login.getPassword());
+			httpSession.setAttribute("profile",vendor);
 			return "profile";
 		}
 		else
@@ -86,17 +87,27 @@ public class HomeController
 			return "login";
 		}
 		}
-	@PostMapping("profile")
-	public String profile(Model model)
+	@GetMapping("/profile")
+	public String profile()
 	{
-	return "update";
+	return "profile";
+	}
+	
+	@GetMapping(value= {"/edit"})
+	public String editProfile(HttpSession httpSession,Model model)
+	{
+		model.addAttribute("vendor", httpSession.getAttribute("profile"));
+		return "edit";
 	}
 	
 	
 	@PostMapping("update")
-	public String updatePage()
+	public String update(@ModelAttribute("vendor")Vendor vendor,HttpSession httpSession)
 	{
+		System.out.println(vendor.getVid());
+		httpSession.setAttribute("profile", vendor);
 		vendorService.updateVendor(vendor);
-		return "update";
+		return "redirect:profile";
+		
 	}
 }
