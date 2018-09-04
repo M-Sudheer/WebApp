@@ -79,8 +79,8 @@ public class HomeController
 		if((vendorService.login(login.getEmail(),login.getPassword())!=null))
 		{
 			vendor=vendorService.login(login.getEmail(),login.getPassword());
-			httpSession.setAttribute("profile",vendor);
-			return "profile";
+			httpSession.setAttribute("vendor",vendor);
+			return "redirect:/profile";
 		}
 		else
 		{
@@ -96,7 +96,7 @@ public class HomeController
 	@GetMapping(value= {"/edit"})
 	public String editProfile(HttpSession httpSession,Model model)
 	{
-		model.addAttribute("vendor", httpSession.getAttribute("profile"));
+		model.addAttribute("vendor", httpSession.getAttribute("vendor"));
 		return "edit";
 	}
 	
@@ -105,9 +105,8 @@ public class HomeController
 	public String update(@ModelAttribute("vendor")Vendor vendor,HttpSession httpSession)
 	{
 		System.out.println(vendor.getVid());
-		httpSession.setAttribute("profile", vendor);
+		httpSession.setAttribute("vendor", vendor);
 		vendorService.updateVendor(vendor);
 		return "redirect:profile";
-		
 	}
 }

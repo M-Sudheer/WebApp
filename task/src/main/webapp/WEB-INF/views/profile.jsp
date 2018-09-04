@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
- <img src="${images}pro.png"> 
+ <%-- <img src="${images}pro.png">  --%>
 <h1>Welcome to ur Profile</h1>
 <form>
 <table>
