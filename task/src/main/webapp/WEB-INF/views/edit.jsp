@@ -8,12 +8,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<springform:form action="update" method="post" modelAttribute="vendor">
+<springform:form action="update" method="post" modelAttribute="user">
 <table>
 
 <tr>
-<td>vid</td>
-<td><springform:input path="vid" type="hidden"/></td>
+<td>user_id</td>
+<td><springform:input path="user_id" type="hidden"/></td>
 </tr>
 
 <tr>
@@ -36,6 +36,11 @@
 <tr>
 <td>Company Name</td>
 <td><springform:input path="companyName"/></td>
+</tr>
+
+<tr>
+<td>Role Name:</td>
+<td><springform:input path="role"/></td>
 </tr>
 
 <tr>

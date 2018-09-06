@@ -15,19 +15,23 @@
 <table>
 <tr>
 <td>UserName:</td>
-<td>${vendor.name}</td>
+<td>${user.name}</td>
 </tr>
 <tr>
 <td>Email:</td>
-<td>${vendor.email}</td>
+<td>${user.email}</td>
 </tr>
 <tr>
 <td>Mobile Number:</td>
-<td>${vendor.mobile}</td>
+<td>${user.mobile}</td>
 </tr>
 <tr>
 <td>Company Name:</td>
-<td>${vendor.companyName}</td>
+<td>${user.companyName}</td>
+</tr>
+<tr>
+<td>Role Name:</td>
+<td>${user.role}</td>
 </tr>
 </table>
 </form>

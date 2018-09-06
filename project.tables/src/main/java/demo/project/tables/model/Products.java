@@ -28,7 +28,7 @@ public class Products
     private Vendor */
 	
 	@ManyToOne
-	private Vendor vendor;
+	private User user;
 	
 	@ManyToOne
 	private SubCategory subCategory;
@@ -68,13 +68,13 @@ public class Products
 	{
 		this.warrantyPeriod = warrantyPeriod;
 	}
-	public Vendor getVendor() 
+	public User getUser() 
 	{
-		return vendor;
+		return user;
 	}
-	public void setVendor(Vendor vendor) 
+	public void setUser(User vendor) 
 	{
-		this.vendor = vendor;
+		this.user = vendor;
 	}
 
 	public void setProduct_id(int product_id) 

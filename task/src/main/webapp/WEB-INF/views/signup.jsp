@@ -9,16 +9,78 @@
 </head>
 <body>
 
-  <springform:form  action="register" method="post" modelAttribute="vendor">
+	<div class="bg">
 
-      <springform:input path="name"/>
-      <springform:input path="email"/>
-      <springform:input path="mobile"/>
-      <springform:input path="companyName"/>
-      <springform:input path="password"/>
-      <input type="submit" value="signup"/>
-     
-  </springform:form>
- 
+
+  <springform:form  action="signup" method="post" modelAttribute="user">
+  
+  
+  <table>
+  
+  <tr>
+  <td><springform:label path="name">Name:</springform:label>
+  <td><springform:input path="name"/></td>
+	</tr>
+	
+	
+	<tr>
+	<td><springform:label path="email">Email:</springform:label>
+	<td><springform:input path="email"/></td>
+	</tr>
+	
+	<tr>
+	<td><springform:label path="mobile">Mobile:</springform:label>
+	<td><springform:input path="mobile"/></td>
+	</tr>
+	
+	<tr>
+	<td><springform:label path="password">Password:</springform:label>
+	<td><springform:input  type="password" path="password"/></td>
+	</tr>
+	
+	<tr>
+	<td><springform:label path="companyName">CompanyName:</springform:label>
+	<td><springform:input path="companyName"/></td>
+	</tr>
+	
+	
+	<td><springform:label path="role">Role:</springform:label></td>
+	<td>
+		<ul>
+			<springform:select path="role">
+				<springform:option value="vendor">Vendor</springform:option>
+				<springform:option value="customer">Customer</springform:option>
+				<springform:option value="admin">Admin</springform:option>
+			</springform:select>
+		
+		</ul>
+		</td>
+	<button class="btn btn-primary"><tr><td><input type="submit" value="signup"/></td></tr></button>
+ </table>
+ </springform:form>
+ </div>
 </body>
 </html>
+<style>
+table
+{
+padding-left:500px;
+padding-top:200px;
+}
+
+
+
+.bg { 
+    	    /* The image used */
+    	    background-image: url("https://wallpapercave.com/wp/Cv7qlJq.jpg");
+
+    	    /* Full height */
+    	    height: 100%; 
+    	    width:100%;
+
+    	    /* Center and scale the image nicely */
+    	    background-position: center;
+    	    background-repeat: no-repeat;
+    	    background-size: cover;
+    	}
+</style>

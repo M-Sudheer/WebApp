@@ -24,7 +24,6 @@ public class ProductServiceImp implements ProductService
 	@Override
 	public boolean addProducts(Products products) 
 	{
-		
 		try
 		{
 			sessionFactory.getCurrentSession().save(products);
@@ -48,6 +47,4 @@ public class ProductServiceImp implements ProductService
 			return false;
 		}
 	}
-
-	
 }

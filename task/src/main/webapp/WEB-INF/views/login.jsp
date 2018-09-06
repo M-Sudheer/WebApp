@@ -9,15 +9,16 @@
 <title>Insert title here</title>
 </head>
 <body>
+
    This is login page
-   
-  
   <springform:form  action="login" method="post" modelAttribute="login">
   
       <springform:input path="email"/>
-      <springform:input path="password"/>
+      <springform:input path="password" type="password"/>
       <input type="submit" value="login"/>
   </springform:form>
- 
+  
 </body>
 </html>
+
+

@@ -5,30 +5,25 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.HashSet;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import demo.project.tables.Imp.VendorServiceImp;
+
 import demo.project.tables.dao.AddressService;
+import demo.project.tables.dao.AdminService;
 import demo.project.tables.dao.CategoryService;
-import demo.project.tables.dao.ProductService;
 import demo.project.tables.dao.SubCategoryService;
-import demo.project.tables.dao.VendorService;
+import demo.project.tables.dao.UserService;
 import demo.project.tables.model.Address;
+import demo.project.tables.model.Admin;
 import demo.project.tables.model.Category;
-import demo.project.tables.model.Products;
 import demo.project.tables.model.SubCategory;
-import demo.project.tables.model.Vendor;
+import demo.project.tables.model.User;
 import demo.project.tables.products.Laptop;
 import demo.project.tables.productsDao.LaptopService;
 
@@ -37,30 +32,28 @@ import demo.project.tables.productsDao.LaptopService;
 public class AppTest
 {
 	@Autowired
-	private Vendor vendor;
+	private User user;
 	@Autowired
 	private Category category;
 	@Autowired
 	private SubCategory subCategory;
 	@Autowired
 	private Laptop laptop;
-	private Address address1;
-	private Address address2;
-	
-	
+	@Autowired
+	private Admin admin;
+
 	
 	@Autowired
-	private VendorService vendorSevice;
-	@Autowired
-	private AddressService addressService;
+	private UserService userSevice;
 	@Autowired
 	private CategoryService categoryService;
 	@Autowired
 	private SubCategoryService subCategoryService;
 	@Autowired
 	private LaptopService laptopService;
+	@Autowired
+	private AdminService adminService;
 	
-
 	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -72,58 +65,46 @@ public class AppTest
 	{
 		AnnotationConfigApplicationContext annotationConfigApplicationContext=new  AnnotationConfigApplicationContext(HibernateConfig.class);
 		
-		vendor.setCompanyName("Amazon");
-		vendor.setEmail("raghu@gmail.com");
-		vendor.setMobile("9594930075");
-		vendor.setName("raghu");
-		vendor.setPassword("raghu");
-		vendor.getVid();
+		user.setName("sudheer");
+		user.setEmail("sudheer@gmail.com");
+		user.setMobile("9989873796");
+		user.setPassword("sudheer");
+		user.setCompanyName("Amazon");
+		user.setRole("Customer");
+		user.getUser_id();
 
-		
-		HashSet<Address> hashSet=new HashSet<Address>();
-		address1=new Address();
-		address2=new Address();
-		address1.setStreetNo(2);
-		address2.setStreetNo(3);
-		address1.setCity("Hyderabad");
-		address2.setCity("Tenali");
-		address1.setDistrict("Telangana");
-		address2.setDistrict("Guntur");
-		
-		hashSet.add(address1);
-		hashSet.add(address2);
-		vendor.setAddresses(hashSet);
-		address1.setVendor(vendor);
-		address2.setVendor(vendor);
-		
-		
-		
+
 		laptop.setRam("8gb");
 		laptop.setRom("4gb");
 		laptop.setProcessor("i7");
+		
+		
+		admin.setName("Sudheer");
+		admin.setPassword("sudheer");
+		
 	}
 	
 	
 	@Test
-	public void addVendorTest()
+	public void addUser()
 	{
-		assertEquals("Test vendor adding Failed",true,vendorSevice.addVendor(vendor));
-		deleteVendor();
+		assertEquals("Test user adding Failed",true,userSevice.addUser(user));
+		deleteUser();
 	}
-	public void deleteVendor()
+	public void deleteUser()
 	{
-		vendorSevice.deleteVendor(vendor);
-	}
-	
-	public void getVendorByEmail()
-	{
-		vendorSevice.addVendor(vendor);
-		assertEquals("test by email failed",true,vendorSevice.getVendorByEmail(vendor.getEmail()));
+		userSevice.deleteUser(user);
 	}
 	
-	public void getVendor()
+	public void getUserByEmail()
 	{
-		assertEquals("getting vendor",true,vendorSevice.addVendor(vendor));
+		userSevice.addUser(user);
+		assertEquals("test by email failed",true,userSevice.getUserByEmail(user.getEmail()));
+	}
+	
+	public void getUser()
+	{
+		assertEquals("getting user",true,userSevice.addUser(user));
 	}
 	
 	
@@ -131,15 +112,27 @@ public class AppTest
 	public void addLaptop()
 	{
 		subCategory=subCategoryService.getSubCategory(1);
-		vendorSevice.addVendor(vendor);
-		laptop.setVendor(vendor);
+		userSevice.addUser(user);
 		laptop.setSubCategory(subCategory);
 		assertEquals("Test Insertion laptop failed",true,laptopService.addLaptop(laptop));
 		deleteLaptop();
-		deleteVendor();
+		deleteUser();
 	}
+	
 	private void deleteLaptop() 
 	{
 	laptopService.deleteLaptop(laptop);
+	}
+	
+	@Test
+	public void addAdmin()
+
+	{
+		assertEquals("Admin test failed",true,adminService.addAdmin(admin));
+		deleteAdmin();
+	}
+	public void deleteAdmin()
+	{
+		adminService.deleteAdmin(admin);
 	}
 }

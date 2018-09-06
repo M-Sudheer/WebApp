@@ -2,7 +2,7 @@
 package demo.project.tables.dao;
 
 import demo.project.tables.model.Products;
-import demo.project.tables.model.Vendor;
+import demo.project.tables.model.User;
 
 public interface ProductService
 {
