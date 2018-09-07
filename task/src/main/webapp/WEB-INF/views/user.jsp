@@ -52,6 +52,10 @@
 		<c:when test="${status==false}">
 		<td><a href="accept/${user.user_id}"><input type="button" value="Activate"></a></td>
 		</c:when>
+		<c:when test="${status==true}">
+		<td><a href="accept/${user.user_id}"><input type="button" value="Deactivate"></a></td>
+		</c:when>
+		
 		</c:choose>
 		</tr>
 		</tbody>

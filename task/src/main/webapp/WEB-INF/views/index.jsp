@@ -23,7 +23,6 @@
 <h1>Electronic Store</h1>
 <p><code>Your Store. Your Place</code></p>
 
-
 <nav class="navbar navbar-expand-sm bg-dark justify-content-center">
   <ul class="navbar-nav">
     <li class="nav-item">

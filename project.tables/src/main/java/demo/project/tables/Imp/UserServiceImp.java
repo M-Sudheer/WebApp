@@ -60,10 +60,17 @@ public class UserServiceImp implements UserService
 	@Override
 	public User login(String email, String password) 
 	{
+		try
+		{
     	Query<User> query=sessionFactory.getCurrentSession().createQuery("from User where email=:email and password=:password",User.class);
         query.setParameter("email",email);
         query.setParameter("password",password);
         return query.getSingleResult();
+	}
+		catch (Exception e) 
+		{
+		return null;
+		}
 	}
 
 
