@@ -18,12 +18,12 @@ import demo.project.tables.dao.AddressService;
 import demo.project.tables.dao.AdminService;
 import demo.project.tables.dao.CategoryService;
 import demo.project.tables.dao.SubCategoryService;
-import demo.project.tables.dao.UserService;
+import demo.project.tables.dao.VendorService;
 import demo.project.tables.model.Address;
 import demo.project.tables.model.Admin;
 import demo.project.tables.model.Category;
 import demo.project.tables.model.SubCategory;
-import demo.project.tables.model.User;
+import demo.project.tables.model.Vendor;
 import demo.project.tables.products.Laptop;
 import demo.project.tables.productsDao.LaptopService;
 
@@ -32,28 +32,28 @@ import demo.project.tables.productsDao.LaptopService;
 public class AppTest
 {
 	@Autowired
-	private User user;
+	private Vendor vendor;
 	@Autowired
 	private Category category;
 	@Autowired
 	private SubCategory subCategory;
 	@Autowired
 	private Laptop laptop;
-	@Autowired
+	/*@Autowired
 	private Admin admin;
-
+*/
 	
 	@Autowired
-	private UserService userSevice;
+	private VendorService vendorSevice;
 	@Autowired
 	private CategoryService categoryService;
 	@Autowired
 	private SubCategoryService subCategoryService;
 	@Autowired
 	private LaptopService laptopService;
-	@Autowired
+	/*@Autowired
 	private AdminService adminService;
-	
+	*/
 	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -65,46 +65,45 @@ public class AppTest
 	{
 		AnnotationConfigApplicationContext annotationConfigApplicationContext=new  AnnotationConfigApplicationContext(HibernateConfig.class);
 		
-		user.setName("sudheer");
-		user.setEmail("sudheer@gmail.com");
-		user.setMobile("9989873796");
-		user.setPassword("sudheer");
-		user.setCompanyName("Amazon");
-		user.setRole("Customer");
-		user.getUser_id();
+		vendor.setName("sai");
+		vendor.setEmail("sai@gmail.com");
+		vendor.setMobile("9989873795");
+		vendor.setPassword("sai");
+		vendor.setCompanyName("Flipkart");
+		vendor.getV_id();
 
 
-		laptop.setRam("8gb");
-		laptop.setRom("4gb");
-		laptop.setProcessor("i7");
+		laptop.setRam("4gb");
+		laptop.setRom("8gb");
+		laptop.setProcessor("i5");
 		
 		
-		admin.setName("Sudheer");
-		admin.setPassword("sudheer");
+		/*admin.setName("Sudheer");
+		admin.setPassword("sudheer");*/
 		
 	}
 	
 	
 	@Test
-	public void addUser()
+	public void addVendor()
 	{
-		assertEquals("Test user adding Failed",true,userSevice.addUser(user));
-		deleteUser();
+		assertEquals("Test user adding Failed",true,vendorSevice.addVendor(vendor));
+		//deleteVendor();
 	}
-	public void deleteUser()
+	public void deleteVendor()
 	{
-		userSevice.deleteUser(user);
-	}
-	
-	public void getUserByEmail()
-	{
-		userSevice.addUser(user);
-		assertEquals("test by email failed",true,userSevice.getUserByEmail(user.getEmail()));
+		vendorSevice.deleteVendor(vendor);
 	}
 	
-	public void getUser()
+	public void getVendorByEmail()
 	{
-		assertEquals("getting user",true,userSevice.addUser(user));
+		vendorSevice.addVendor(vendor);
+		assertEquals("test by email failed",true,vendorSevice.getVendorByEmail(vendor.getEmail()));
+	}
+	
+	public void getVendor()
+	{
+		assertEquals("getting user",true,vendorSevice.addVendor(vendor));
 	}
 	
 	
@@ -112,11 +111,11 @@ public class AppTest
 	public void addLaptop()
 	{
 		subCategory=subCategoryService.getSubCategory(1);
-		userSevice.addUser(user);
+		vendorSevice.addVendor(vendor);
 		laptop.setSubCategory(subCategory);
 		assertEquals("Test Insertion laptop failed",true,laptopService.addLaptop(laptop));
 		deleteLaptop();
-		deleteUser();
+		deleteVendor();
 	}
 	
 	private void deleteLaptop() 
@@ -124,7 +123,7 @@ public class AppTest
 	laptopService.deleteLaptop(laptop);
 	}
 	
-	@Test
+	/*@Test
 	public void addAdmin()
 
 	{
@@ -134,5 +133,5 @@ public class AppTest
 	public void deleteAdmin()
 	{
 		adminService.deleteAdmin(admin);
-	}
+	}*/
 }

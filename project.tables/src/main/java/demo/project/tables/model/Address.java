@@ -21,13 +21,13 @@ public class Address
 	private String district;
 
 	@ManyToOne
-	private User vendor;
+	private Vendor vendor;
 	
 	
-	public User getVendor() {
+	public Vendor getVendor() {
 		return vendor;
 	}
-	public void setVendor(User vendor) {
+	public void setVendor(Vendor vendor) {
 		this.vendor = vendor;
 	}
 	public int getAddress_id() 

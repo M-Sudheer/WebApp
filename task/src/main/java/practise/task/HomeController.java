@@ -13,17 +13,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import demo.project.tables.dao.UserService;
+import demo.project.tables.dao.VendorService;
 import demo.project.tables.model.Login;
-import demo.project.tables.model.User;
+import demo.project.tables.model.Vendor;
 
 @Controller
 public class HomeController 
 {
 	@Autowired
-	private User user;
+	private Vendor vendor;
 	@Autowired
-	private UserService userService;
+	private VendorService vendorService;
 	@Autowired
 	private SessionFactory sessionFactory;
 	
@@ -37,7 +37,7 @@ public class HomeController
 	@RequestMapping("/contact")
 	public String  contactPage(Model model,HttpSession session)
 	{
-		session.setAttribute("name","Sudheer");
+		session.setAttribute("name","Sai");
 		model.addAttribute("date", new Date());
 		return "contact";
 	}
@@ -53,15 +53,15 @@ public class HomeController
 	@GetMapping(value= {"/","/signup"})
 	public String signup(Model model)
 	{
-		model.addAttribute("user", new User());
+		model.addAttribute("vendor", new Vendor());
 		return "signup";
 	}
 	@PostMapping("/signup")
-	public String addUser(@ModelAttribute("user")User user) 
+	public String addVendor(@ModelAttribute("vendor")Vendor vendor) 
 	{
-		if(userService.getUserByEmail(user.getEmail())==null)
+		if(vendorService.getVendorByEmail(vendor.getEmail())==null)
 		{
-			userService.addUser(user);
+			vendorService.addVendor(vendor);
 			return "redirect:/login";
 		}
 		else
@@ -77,26 +77,15 @@ public class HomeController
 	}
 
 	@PostMapping("/login")
-	public String getVendor(@ModelAttribute("login") Login login,User user,HttpSession httpSession)
+	public String getVendor(@ModelAttribute("login") Login login,Vendor vendor,HttpSession httpSession)
 		{
-		if((userService.login(login.getEmail(),login.getPassword())!=null))
+		if((vendorService.login(login.getEmail(),login.getPassword())!=null))
 		{
-			user=userService.login(login.getEmail(),login.getPassword());
-			httpSession.setAttribute("user",user);
+			vendor=vendorService.login(login.getEmail(),login.getPassword());
+			httpSession.setAttribute("vendor",vendor);
 			
-			if(user.getRole().equalsIgnoreCase("admin"))
-			{
-				return "admin";
-			}
-			else if(user.getRole().equalsIgnoreCase("vendor"))
-				{
-					return "vendor";
-			    }
-			
-		else
-			return "customer";			
-			
-		}
+			return "redirect:/login";
+		}	
 			else
 			{
 				return "login";
@@ -119,43 +108,34 @@ public class HomeController
 	
 	
 	@PostMapping("/update")
-	public String update(@ModelAttribute("user")User vendor,HttpSession httpSession)
+	public String update(@ModelAttribute("vendor")Vendor vendor,HttpSession httpSession)
 	{
-		System.out.println(user.getUser_id());
+		System.out.println(vendor.getV_id());
 		httpSession.setAttribute("vendor", vendor);
-		userService.updateUser(user);
+		vendorService.updateVendor(vendor);
+	
+			return "login";
+	}
 		
 
-		if(user.getRole().equalsIgnoreCase("admin"))
-		{
-			return "admin";
-		}
-		else if(user.getRole().equalsIgnoreCase("vendor"))
-			{
-				return "vendor";
-		    }
-		
-	else
-		return "customer";			
-		
-	}
+/*
 	
-	@GetMapping("user")
-	public String getUser(Map<String,Object> user)
+	@GetMapping("vendor")
+	public String getUser(Map<String,Object> vendor)
 	{
-		user.put("userList", userService.getVendorDetails());
-		return "user";
+		vendor.put("vendorList", vendorService.getVendorDetails());
+		return "vendor";
 	}
 	
 	@GetMapping("profile")
-	public String getUser()
+	public String getVendor()
 	{
 		return "profile";
 	}
+	*/
 	
 	
-	
-	
+	/*
 	@GetMapping("accept/{user_id}")
 	public String acceptUser(@PathVariable("user_id")int user_id)
 	{
@@ -173,5 +153,5 @@ public class HomeController
 		user.setStatus(false);
 		userService.updateUser(user);
 		return "index";
-	}
+	}*/
 }

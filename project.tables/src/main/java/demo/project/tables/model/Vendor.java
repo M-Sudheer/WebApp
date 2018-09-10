@@ -1,5 +1,4 @@
 package demo.project.tables.model;
-
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -7,60 +6,61 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.stereotype.Component;
 
 @Entity
 @Component
-public class User
+public class Vendor
 {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int user_id;
+	private int v_id;
 	@Column(unique=true)
+	@NotNull(message="name should not be null")
+	@NotBlank(message="name should not be blank")
 	private String name;
+	@NotNull(message="email should not be null")
+	@NotBlank(message="email should not be blank")
+	@Pattern(regexp="/^([a-zA-Z]+)@([a-sA-Z0-9]+).([a-z])",message="Enter a proper email id format")
 	@Column(unique=true)
 	private String email;
 	@Column(unique=true)
 	private String mobile;
 	private String companyName;
+	@NotNull(message="password should not be null")
+	@NotBlank(message="password should not be blank")
 	@Column(unique=true)
 	private String password;
-	private String role;
 	
-	private boolean status=false;
+	/*private boolean status=false;*/
 	
 
-	public boolean isStatus() {
+	/*public boolean isStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(boolean status) 
+	{
 		this.status = status;
-	}
+	}*/
 
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="vendor")
 	private Set<Products> products;
 
 	
 	
-	
-	public String getRole() {
-		return role;
+
+	public int getV_id() {
+		return v_id;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
-	}
-
-	public int getUser_id() {
-		return user_id;
-	}
-
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setV_id(int v_id) {
+		this.v_id = v_id;
 	}
 
 	public String getName() {
@@ -91,34 +91,38 @@ public class User
 		return companyName;
 	}
 
-	public void setCompanyName(String companyName) {
+	public void setCompanyName(String companyName) 
+	{
 		this.companyName = companyName;
 	}
 
-	public String getPassword() {
+	public String getPassword() 
+	{
 		return password;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(String password) 
+	{
 		this.password = password;
 	}
 
-	public Set<Products> getProducts() {
+	public Set<Products> getProducts() 
+	{
 		return products;
 	}
 
-	public void setProducts(Set<Products> products) {
+	public void setProducts(Set<Products> products)
+	{
 		this.products = products;
 	}
 
 	@Override
 	public String toString() {
-		return "User [user_id=" + user_id + ", name=" + name + ", email=" + email + ", mobile=" + mobile
-				+ ", companyName=" + companyName + ", password=" + password + ", products=" + products + "]";
+		return "Vendor [v_id=" + v_id + ", name=" + name + ", email=" + email + ", mobile=" + mobile + ", companyName="
+				+ companyName + ", password=" + password + ", products="
+				+ products + "]";
 	}
 
-	
-	
 
 
 }

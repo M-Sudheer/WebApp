@@ -8,24 +8,23 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import demo.project.tables.dao.UserService;
-import demo.project.tables.model.User;
-import demo.project.tables.model.User;
+import demo.project.tables.dao.VendorService;
+import demo.project.tables.model.Vendor;
 
 @Component
 @Transactional
-public class UserServiceImp implements UserService
+public class VenodrServiceImp implements VendorService
 {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
 	@Override
-	public boolean addUser(User user)
+	public boolean addVendor(Vendor vendor)
 	
 	{
 		try
 		{
-			sessionFactory.getCurrentSession().save(user);
+			sessionFactory.getCurrentSession().save(vendor);
 			
 			return true;
 		}
@@ -39,11 +38,11 @@ public class UserServiceImp implements UserService
 
 
 	@Override
-	public boolean deleteUser(User user) 
+	public boolean deleteVendor(Vendor vendor) 
 	{
 		try
 		{
-			sessionFactory.getCurrentSession().delete(user);
+			sessionFactory.getCurrentSession().delete(vendor);
 			
 			return true;
 		}
@@ -58,11 +57,11 @@ public class UserServiceImp implements UserService
 
 
 	@Override
-	public User login(String email, String password) 
+	public Vendor login(String email, String password) 
 	{
 		try
 		{
-    	Query<User> query=sessionFactory.getCurrentSession().createQuery("from User where email=:email and password=:password",User.class);
+    	Query<Vendor> query=sessionFactory.getCurrentSession().createQuery("from Vendor where email=:email and password=:password",Vendor.class);
         query.setParameter("email",email);
         query.setParameter("password",password);
         return query.getSingleResult();
@@ -76,11 +75,11 @@ public class UserServiceImp implements UserService
 
 
 	@Override
-	public User getUser(int id) 
+	public Vendor getVendor(int id) 
 	{
 		try
 		{
-			return sessionFactory.getCurrentSession().get(User.class,id);
+			return sessionFactory.getCurrentSession().get(Vendor.class,id);
 		}
 		catch (Exception e) 
 		{
@@ -88,12 +87,14 @@ public class UserServiceImp implements UserService
 		}
 	}
 
+	
+	
 	@Override
-	public User getUserByEmail(String email) 
+	public Vendor getVendorByEmail(String email) 
 	{
 		try
 		{
-		Query<User> query=sessionFactory.getCurrentSession().createQuery("from Vendor where email=:email",User.class);
+		Query<Vendor> query=sessionFactory.getCurrentSession().createQuery("from Vendor where email=:email",Vendor.class);
 		query.setParameter("email",email);
 		return query.getSingleResult();
 	}
@@ -106,10 +107,10 @@ public class UserServiceImp implements UserService
 
 
 	@Override
-	public boolean updateUser(User user) {
+	public boolean updateVendor(Vendor vendor) {
 		try
 		{
-			sessionFactory.getCurrentSession().update(user);
+			sessionFactory.getCurrentSession().update(vendor);
 			
 			return true;
 		}
@@ -123,17 +124,16 @@ public class UserServiceImp implements UserService
 
 
 	@Override
-	public List<User> getVendorDetails() 
+	public List<Vendor> getVendorDetails() 
 	{
 		try
 		{
-			Query<User> query=sessionFactory.getCurrentSession().createQuery("from User where role='vendor'",User.class);
+			Query<Vendor> query=sessionFactory.getCurrentSession().createQuery("from Vendor where role='vendor'",Vendor.class);
 			return query.getResultList();
 		}
 		catch (Exception e) {
 
 		return null;
 	}
-
 	}
 }

@@ -72,13 +72,9 @@ padding-top:1px;
            background-repeat: no-repeat;
            background-size: cover;
        }
-       /*.form-container{border:0px solid #fff; padding: 30px 60px;
-           margin-top: 40vh;
-           -webkit-box-shadow: 22px 20px 25px 9px rgba(0,0,0,0.75);
--moz-box-shadow: 22px 20px 25px 9px rgba(0,0,0,0.75);
-box-shadow: 22px 20px 25px 9px rgba(0,0,0,0.75);
-       }*/
-       form{
+       
+ form
+ {
            padding-left: 600px;
            padding-top: 150px;
        }

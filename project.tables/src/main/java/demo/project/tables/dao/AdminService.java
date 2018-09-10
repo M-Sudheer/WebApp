@@ -1,7 +1,7 @@
 package demo.project.tables.dao;
 
 import demo.project.tables.model.Admin;
-import demo.project.tables.model.User;
+import demo.project.tables.model.Vendor;
 
 public interface AdminService  {
 
