@@ -6,5 +6,7 @@ public interface SubCategoryService
 {
 
 	public abstract SubCategory getSubCategory(int subc_id);
-
+	
+	
+	
 }

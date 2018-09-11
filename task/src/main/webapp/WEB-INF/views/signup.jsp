@@ -37,9 +37,6 @@
         <div class="container-fluid bg">
             <div class="row">
 <springform:form  action="signup" method="post" modelAttribute="vendor">
-<!-- <center>
-<i class="fas fa-users"></i>
-</center> -->
 <h2>Sign Up</h2>
 <div class="form-group">
 <springform:errors path="name"></springform:errors>
@@ -49,7 +46,7 @@
 <div class="form-group">
 <springform:errors path="email"></springform:errors>
 <label for="email">Email:</label>
-<springform:input path="email" class="form-control" id="email" placeholder="@email"/>
+<springform:input path="email" class="form-control" id="email" />
 </div>
 <div class="form-group">
 <springform:errors path="mobile"></springform:errors>
@@ -82,10 +79,8 @@
 <style>
 .bg {
            /* The image used */
-           background-image: url("http://lh4.ggpht.com/-MhNrLp6NYs4/U1sK0EXcqKI/AAAAAAAAS-Y/fCnJdHXmClQ/s1024/main-background.jpg
-http://lh4.ggpht.com/-MhNrLp6NYs4/U1sK0EXcqKI/AAAAAAAAS-Y/fCnJdHXmClQ/s1024/main-background.jpg
-");
-           /* Full height */
+           background-image: url ("https://www.pixelstalk.net/wp-content/uploads/2016/10/Dark-Pink-Wallpapers-HD-Free-Download-620x388.jpg");
+         /* Full height */
            width: 100%;
            height: 100vh;
 
@@ -94,15 +89,10 @@ http://lh4.ggpht.com/-MhNrLp6NYs4/U1sK0EXcqKI/AAAAAAAAS-Y/fCnJdHXmClQ/s1024/main
            background-repeat: no-repeat;
            background-size: cover;
        }
-       /*.form-container{border:0px solid #fff; padding: 30px 60px;
-           margin-top: 40vh;
-           -webkit-box-shadow: 22px 20px 25px 9px rgba(0,0,0,0.75);
--moz-box-shadow: 22px 20px 25px 9px rgba(0,0,0,0.75);
-box-shadow: 22px 20px 25px 9px rgba(0,0,0,0.75);
-       }*/
+       
        form{
            padding-left: 550px;
-           padding-top: 70px;
+           padding-top: 30px;
        }
 
 </style>

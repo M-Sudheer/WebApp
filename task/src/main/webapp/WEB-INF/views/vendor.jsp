@@ -1,4 +1,4 @@
-<%-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  <%@page isELIgnored="false" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="spring" %>
@@ -15,11 +15,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
 </head>
 <body>
 
-<c:if test="${!empty userList}">
+<c:if test="${!empty vendorList}">
 	<table class="table table-bordered table-sm">
 		<thead>
 			<tr>
@@ -27,33 +26,33 @@
 				<th>name</th>
 				<th>email</th>
 				<th>mobile</th>
-				<th>role</th>
+				<!-- <th>role</th> -->
 				<th>status</th>
 				<th>operation</th>
 			</tr>
 		</thead>
 		
-	<c:forEach items="${userList}" var="user">
+	<c:forEach items="${vendorList}" var="vendor">
 	<tbody>
 	
 	<tr>
-		<td><c:out value="${user.user_id}"></c:out></td>
-		<td><c:out value="${user.name}"></c:out></td>
-		<td><c:out value="${user.email}"></c:out></td>
-		<td><c:out value="${user.mobile}"></c:out></td>
-		<td><c:out value="${user.role}"></c:out></td>
-		<td><c:out value="${user.status}"></c:out></td>
+		<td><c:out value="${vendor.v_id}"></c:out></td>
+		<td><c:out value="${vendor.name}"></c:out></td>
+		<td><c:out value="${vendor.email}"></c:out></td>
+		<td><c:out value="${vendor.mobile}"></c:out></td>
+		<%-- <td><c:out value="${vendor.role}"></c:out></td> --%>
+		<td><c:out value="${vendor.status}"></c:out></td>
 		
 		
 		
-		<c:set var="status" scope="session" value="${user.status}"/>
+		<c:set var="status" scope="session" value="${vendor.status}"/>
 		
 		<c:choose>
 		<c:when test="${status==false}">
-		<td><a href="accept/${user.user_id}"><input type="button" value="Activate"></a></td>
+		<td><a href="accept/${vendor.v_id}"><input type="button" value="Activate"></a></td>
 		</c:when>
 		<c:when test="${status==true}">
-		<td><a href="accept/${user.user_id}"><input type="button" value="Deactivate"></a></td>
+		<td><a href="accept/${vendor.v_id}"><input type="button" value="Deactivate"></a></td>
 		</c:when>
 		
 		</c:choose>
@@ -63,4 +62,4 @@
 	</table>
 </c:if>
 </body>
-</html> --%>
+</html>

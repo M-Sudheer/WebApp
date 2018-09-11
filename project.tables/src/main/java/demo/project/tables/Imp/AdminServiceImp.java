@@ -1,4 +1,4 @@
-package demo.project.tables.Imp;
+/*package demo.project.tables.Imp;
 
 import javax.transaction.Transactional;
 
@@ -60,4 +60,4 @@ public class AdminServiceImp implements AdminService
 		}
 		}
 	}
-	
+	*/

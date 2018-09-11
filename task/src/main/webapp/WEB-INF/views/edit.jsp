@@ -83,8 +83,8 @@
 						<springform:form  action="signup" method="post" modelAttribute="vendor">
 			
 			<div class="form-group">
-			<label for="user_id">User_Id</label>
-			<springform:input path="user_id" class="form-control" id="user_id" type="hidden"/>
+			<label for="v_id">User_Id</label>
+			<springform:input path="v_id" class="form-control" id="v_id" type="hidden"/>
 			</div>
 			
 			<div class="form-group">

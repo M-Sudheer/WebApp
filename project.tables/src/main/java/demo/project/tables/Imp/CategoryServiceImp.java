@@ -1,8 +1,11 @@
 package demo.project.tables.Imp;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,4 +40,18 @@ public class CategoryServiceImp implements CategoryService
 	}
 
 	}
+
+
+	@Override
+	public List<Category> getCategoryDetails() 
+	{
+		try
+		{
+		Query<Category> query=sessionFactory.getCurrentSession().createQuery("from Category",Category.class);
+		return query.getResultList();
+	}
+		catch (Exception e) {
+			return null;
+		}
+}
 }

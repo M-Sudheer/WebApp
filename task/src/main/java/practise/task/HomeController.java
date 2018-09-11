@@ -3,17 +3,24 @@ import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import demo.project.tables.dao.CategoryService;
 import demo.project.tables.dao.VendorService;
+import demo.project.tables.model.Category;
+import demo.project.tables.model.Customer;
 import demo.project.tables.model.Login;
 import demo.project.tables.model.Vendor;
 
@@ -24,6 +31,10 @@ public class HomeController
 	private Vendor vendor;
 	@Autowired
 	private VendorService vendorService;
+	@Autowired
+	private Category category;
+	@Autowired
+	private CategoryService categoryService;
 	@Autowired
 	private SessionFactory sessionFactory;
 	
@@ -37,7 +48,7 @@ public class HomeController
 	@RequestMapping("/contact")
 	public String  contactPage(Model model,HttpSession session)
 	{
-		session.setAttribute("name","Sai");
+		session.setAttribute("name","Sudheer");
 		model.addAttribute("date", new Date());
 		return "contact";
 	}
@@ -48,6 +59,7 @@ public class HomeController
 		modelAndView.addObject("date", new Date());
 		return modelAndView;
 	}
+	
 
 	
 	@GetMapping(value= {"/","/signup"})
@@ -57,12 +69,20 @@ public class HomeController
 		return "signup";
 	}
 	@PostMapping("/signup")
-	public String addVendor(@ModelAttribute("vendor")Vendor vendor) 
+	public String addVendor( @Valid @ModelAttribute("vendor")Vendor vendor,BindingResult result) 
 	{
+		if(!result.hasErrors())
+		{
 		if(vendorService.getVendorByEmail(vendor.getEmail())==null)
 		{
 			vendorService.addVendor(vendor);
 			return "redirect:/login";
+		}
+		
+		else
+		{
+			return "signup";
+		}
 		}
 		else
 		{
@@ -77,32 +97,34 @@ public class HomeController
 	}
 
 	@PostMapping("/login")
-	public String getVendor(@ModelAttribute("login") Login login,Vendor vendor,HttpSession httpSession)
+	public String getCustomer(@ModelAttribute("login") Login login,Vendor vendor,HttpSession httpSession)
 		{
 		if((vendorService.login(login.getEmail(),login.getPassword())!=null))
 		{
 			vendor=vendorService.login(login.getEmail(),login.getPassword());
 			httpSession.setAttribute("vendor",vendor);
 			
-			return "redirect:/login";
-		}	
-			else
-			{
-				return "login";
-			}
+			return "vendorIndex";
+
+		}
+		else
+		{
+			return "login";
+		}
 		}
 	
 	
+
 	/*@GetMapping("/profile")
 	public String profile()
 	{
 	return "profile";
-	}*/
-	
+	}
+	*/
 	@GetMapping(value= {"/edit"})
 	public String editProfile(HttpSession httpSession,Model model)
 	{
-		model.addAttribute("user", httpSession.getAttribute("user"));
+		model.addAttribute("vendor", httpSession.getAttribute("vendor"));
 		return "edit";
 	}
 	
@@ -110,48 +132,56 @@ public class HomeController
 	@PostMapping("/update")
 	public String update(@ModelAttribute("vendor")Vendor vendor,HttpSession httpSession)
 	{
-		System.out.println(vendor.getV_id());
+		System.out.println(vendor);
 		httpSession.setAttribute("vendor", vendor);
 		vendorService.updateVendor(vendor);
-	
-			return "login";
-	}
+		return "profile";
 		
-
-/*
+	}
+	
+	
 	
 	@GetMapping("vendor")
-	public String getUser(Map<String,Object> vendor)
+	public String getVendor(Map<String,Object> vendor)
 	{
 		vendor.put("vendorList", vendorService.getVendorDetails());
 		return "vendor";
 	}
+	
+	
 	
 	@GetMapping("profile")
 	public String getVendor()
 	{
 		return "profile";
 	}
-	*/
 	
 	
-	/*
-	@GetMapping("accept/{user_id}")
-	public String acceptUser(@PathVariable("user_id")int user_id)
+	
+	
+	@GetMapping("accept/{v_id}")
+	public String acceptVendor(@PathVariable("v_id")int v_id)
 	{
-		User user=userService.getUser(user_id);
-		user.setStatus(true);
-		userService.updateUser(user);
+		Vendor vendor=vendorService.getVendor(v_id);
+		vendor.setStatus(true);
+		vendorService.updateVendor(vendor);
 		return "index";
 	}
 	
 	
-	@GetMapping("reject/{user_id}")
-	public String rejectUser(@PathVariable("user_id")int user_id)
+	@GetMapping("reject/{v_id}")
+	public String rejectVendor(@PathVariable("v_id")int v_id)
 	{
-		User user=userService.getUser(user_id);
-		user.setStatus(false);
-		userService.updateUser(user);
+		Vendor vendor=vendorService.getVendor(v_id);
+		vendor.setStatus(false);
+		vendorService.updateVendor(vendor);
 		return "index";
-	}*/
+	}
+	
+	@GetMapping("category")
+	public String getCategory(Map<String,Object> category)
+	{
+		category.put("categoryList", categoryService.getCategoryDetails());
+		return "category";
+	}
 }

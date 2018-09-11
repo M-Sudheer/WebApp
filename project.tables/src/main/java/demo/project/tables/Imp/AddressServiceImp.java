@@ -1,4 +1,4 @@
-package demo.project.tables.Imp;
+/*package demo.project.tables.Imp;
 
 import javax.transaction.Transactional;
 
@@ -45,3 +45,4 @@ public class AddressServiceImp implements AddressService
 		}	
 	}
 }
+*/

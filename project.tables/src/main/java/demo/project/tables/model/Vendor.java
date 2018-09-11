@@ -21,33 +21,33 @@ public class Vendor
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int v_id;
 	@Column(unique=true)
-	@NotNull(message="name should not be null")
-	@NotBlank(message="name should not be blank")
+	/*@NotNull(message="name should not be null")
+	@NotBlank(message="name should not be blank")*/
 	private String name;
-	@NotNull(message="email should not be null")
+	/*@NotNull(message="email should not be null")
 	@NotBlank(message="email should not be blank")
-	@Pattern(regexp="/^([a-zA-Z]+)@([a-sA-Z0-9]+).([a-z])",message="Enter a proper email id format")
+	@Pattern(regexp="/^([a-zA-Z]+)@([a-sA-Z0-9]+).([a-z])",message="Enter a proper email id format")*/
 	@Column(unique=true)
 	private String email;
 	@Column(unique=true)
 	private String mobile;
 	private String companyName;
-	@NotNull(message="password should not be null")
-	@NotBlank(message="password should not be blank")
+	/*@NotNull(message="password should not be null")
+	@NotBlank(message="password should not be blank")*/
 	@Column(unique=true)
 	private String password;
 	
-	/*private boolean status=false;*/
+	private boolean status=false;
 	
 
-	/*public boolean isStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 
 	public void setStatus(boolean status) 
 	{
 		this.status = status;
-	}*/
+	}
 
 	@OneToMany(mappedBy="vendor")
 	private Set<Products> products;

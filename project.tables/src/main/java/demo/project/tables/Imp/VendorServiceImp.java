@@ -13,14 +13,13 @@ import demo.project.tables.model.Vendor;
 
 @Component
 @Transactional
-public class VenodrServiceImp implements VendorService
+public class VendorServiceImp implements VendorService
 {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
 	@Override
 	public boolean addVendor(Vendor vendor)
-	
 	{
 		try
 		{
@@ -128,7 +127,7 @@ public class VenodrServiceImp implements VendorService
 	{
 		try
 		{
-			Query<Vendor> query=sessionFactory.getCurrentSession().createQuery("from Vendor where role='vendor'",Vendor.class);
+			Query<Vendor> query=sessionFactory.getCurrentSession().createQuery("from Vendor",Vendor.class);
 			return query.getResultList();
 		}
 		catch (Exception e) {
